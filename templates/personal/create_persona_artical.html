@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建博客</title>
+    <style>
+        body
+            {
+                background: #B0C4DE;
+            }
+        #title{
+           position: absolute;
+           left: 500px;
+           top: 240px;
+          width:180px;
+          height:30px
+          font-family: sans-serif;
+          font-size: 15px;
+          font-style:italic;
+        }
+        #body{
+          position: absolute;
+           left: 500px;
+            top: 300px;
+          width:180px;
+          height:30px
+         font-family: sans-serif;
+          font-size: 15px;
+          TABLE-LAYOUT: fixed;
+         WORD-BREAK: break-all;
+         border-collapse: collapse;
+        }
+        #save{
+           position: absolute;
+              left: 730px;
+              top: 350px;
+
+
+        }
+        #h{
+           position: absolute;
+              left:550px;
+              top: 40px;
+
+        }
+
+    </style>
+</head>
+<body>
+<center id="h"><h3>新建博客</h3></center>
+ <form method="post">
+
+    <input name="title" id="title" value="{{ request.form['title'] }}" required>
+    <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
+    <input type="submit" value="保存" id="save">
+  </form>
+
+</body>
+</html>

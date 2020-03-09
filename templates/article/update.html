@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更新博客</title>
+
+    <style>
+        #t{
+          position: absolute;
+              left: 500px;
+              top: 240px;
+
+        }
+        #c{
+
+          position: absolute;
+              left: 500px;
+              top: 300px;
+
+        }
+        #s{
+          position: absolute;
+              left: 730px;
+              top: 310px;
+
+
+        }
+        .danger{
+
+        position: absolute;
+              left: 800px;
+              top: 310px;
+        }
+        h3{
+          position: absolute;
+              left: 530px;
+              top: 10px;
+        }
+
+        body{
+        background: #B0C4DE;
+        }
+
+        #body{
+        width:180px;
+        height:30px
+         TABLE-LAYOUT: fixed;
+         WORD-BREAK: break-all;
+         border-collapse: collapse;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<h3>博客更新内容</h3>
+ <form method="post">
+     <div id="t">
+          <label for="title">标题</label>
+          <textarea name="title" id="title" style="width:180px; height:30px">{{ request.form['title'] or result['title'] }}</textarea>
+     </div>
+     <div id="c">  <label for="body">内容</label>
+    <textarea name="body" id="body">{{ request.form['body'] or result['body'] }}</textarea></div>
+    <input type="submit" value="保存" id="s">
+  </form>
+  <form action="{{ url_for('artical.delete', id=result['id']) }}" method="post">
+    <input class="danger" type="submit" value="删除" onclick="return confirm('Are you sure?');">
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客列表</title>
+    <style>
+          body
+            {
+                background: #B0C4DE;
+            }
+            ar{
+          font-family: sans-serif;
+          font-size: 30px;
+          font-style:italic;
+            }
+            #new{
+             position: absolute;
+              left: 1050px;
+              top: 10px;
+               font-family: sans-serif;
+               font-size: 15px;
+               color: blue;
+            }
+
+              #out{
+             position: absolute;
+              left: 1120px;
+              top: 10px;
+               font-family: sans-serif;
+               font-size: 15px;
+               color: blue;
+            }
+            a{text-decoration: none;
+              font-size: 15px;
+            }
+            #login{
+             position: absolute;
+              left: 1170px;
+              top: 10px;
+               font-family: sans-serif;
+               font-size: 18px;
+               color: blue;
+            }
+            h2{
+
+              color: blue;
+            }
+            #register{
+
+             position: absolute;
+              left: 1230px;
+              top: 10px;
+               font-family: sans-serif;
+               font-size: 18px;
+               color: blue;
+            }
+            #user{
+              position: absolute;
+              left: 1160px;
+              top: 10px;
+               font-family: sans-serif;
+               font-size: 11px;
+               color: blue;
+
+            }
+               pre{
+    white-space:pre-wrap;
+    white-space:-moz-pre-wrap;
+    white-space:-pre-wrap;
+    white-space:-o-pre-wrap;
+    word-wrap:break-word;
+    }
+    #xuan{
+      position: absolute;
+              left: 1160px;
+              top: 10px;
+               font-family: sans-serif;
+               font-size: 11px;
+               color: blue;
+    }
+
+    </style>
+</head>
+<body>
+ <center><h2>博客首页</h2></center>
+  {% if g.user %}
+    <a id='new' class="action" href="{{ url_for('artical.create_artical') }}">创建博客</a>
+  <br>
+      <a  id='out' class="action" href="{{ url_for('auth.logout') }}">注销</a>
+    <select id="xuan" onchange="window.location=this.value;" style="border:1px;color:blue; width:90px;
+          height:20px">
+        <option><p id="user">用户名:&nbsp;{{g.user.username }}</p></option>
+         <option value="{{ url_for('personal_artical.personal_artical_list', id=g.user['id']) }}">个人中心</option></select>
+ {% else%}
+         <a id="login" href="{{url_for('auth.login')}}">登录</a>
+       <a id="register" href="{{url_for('auth.register')}}">注册</a>
+  {% endif %}
+ {% for artical in result %}
+    <article class="post">
+      <header>
+        <div>
+            <center id ='ar'><h3>{{ artical['title'] }}</h3></center>
+         <center><div class="about">by {{ artical['username'] }} on {{ artical['created'] }}</div></center>
+        </div>
+        {% if g.user['id'] == artical['author_id'] %}
+          <center><a class="action" href="{{ url_for('artical.update_artical', id=artical['id']) }}">编辑</a></center>
+        {% endif %}
+      </header>
+      <center><pre class="body" id="cen">{{ artical['body'] }}</pre></center>
+    </article>
+    {% if not loop.last %}
+      <hr style="visibility:hidden;">
+    {% endif %}
+  {% endfor %}
+
+</body>
+</html>
